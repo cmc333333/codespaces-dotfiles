@@ -1,6 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
-sudo apt-get update && sudo apt-get install -y fuse
-sudo curl --location --output /usr/bin/nvim https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-sudo chmod a+x /usr/bin/nvim
+mkdir -p ~/nvim-lib
+cd ~/nvim-lib
+curl --location --remote-name https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
+./nvim.appimage --appimage-extract
+cd ~/.local/bin
+ln -s ../../nvim-lib/squashfs-root/usr/bin/nvim .
